@@ -1,7 +1,7 @@
 resource "aws_vpc" "javahome_vpc" {
-  cidr_block     = "192.168.0.0/24"
+  cidr_block     = "192.168.1.0/24"
   instance_tenancy = "default"
   tags = {
-    Name = "demo-vpc"
+    Name = "demo-vpc_JJ"
   }
 }
