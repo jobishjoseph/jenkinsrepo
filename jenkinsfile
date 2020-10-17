@@ -1,17 +1,23 @@
 pipeline{
   agent any
-  environment {
-  PATH = "${PATH}:${getTerraformPath()}"
+  tools {
+    terraform 'terraform_13'
   }
   stages{
-    stage('terraform init and apply - dev'){
+    stage('Git checkout'){
+      steps{
+       git 'https://github.com/jobejoseph/jenkinsrepo'
+      }
+    }
+    stage('terraform init'){
       steps{
         sh "terraform init"
       }
     }
+   stage('terraform apply'){
+      steps{
+        sh "terraform apply --auto-approve"
+      }
+    }
   }
-}
-def getTerraformPath(){
-  def tfHome = tool name: 'terraform_13', type: 'terraform'
-  return tfHome
 }
